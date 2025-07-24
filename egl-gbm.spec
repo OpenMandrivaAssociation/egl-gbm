@@ -20,10 +20,12 @@ Source0:	https://github.com/NVIDIA/egl-gbm/archive/%{version}/%{name}-%{version}
 BuildRequires:	pkgconfig(eglexternalplatform)
 BuildRequires:	pkgconfig(libdrm)
 BuildRequires:	pkgconfig(gbm)
+BuildRequires:	pkgconfig(egl)
 
 %if %{with compat32}
 BuildRequires:	devel(libdrm)
 BuildRequires:	devel(libgbm)
+BuildRequires:	devel(libEGL)
 %endif
 
 Requires:	%{libname} >= %{EVRD}

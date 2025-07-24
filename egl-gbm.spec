@@ -20,6 +20,12 @@ Source0:	https://github.com/NVIDIA/egl-gbm/archive/%{version}/%{name}-%{version}
 BuildRequires:	pkgconfig(eglexternalplatform)
 BuildRequires:	pkgconfig(libdrm)
 BuildRequires:	pkgconfig(gbm)
+
+%if %{with compat32}
+BuildRequires:	devel(libdrm)
+BuildRequires:	devel(libgbm)
+%endif
+
 Requires:	%{libname} >= %{EVRD}
 BuildSystem:	meson
 

@@ -1,6 +1,12 @@
 %global major 1
 %define libname %mklibname nvidia-egl-gbm
-%define devname %mklibname -d nvidia-egl-gbm
+%define lib32name %mklib32name nvidia-egl-gbm
+
+%ifarch %{x86_64}
+%bcond_without compat32
+%else
+%bcond_with compat32
+%endif
 
 Name:		egl-gbm
 Version:	1.1.2.1
@@ -12,13 +18,7 @@ URL:		https://github.com/NVIDIA/egl-gbm
 Source0:	https://github.com/NVIDIA/egl-gbm/archive/%{version}/%{name}-%{version}.tar.gz
 
 BuildRequires:	pkgconfig(libdrm)
-BuildRequires:	pkgconfig(eglexternalplatform) >= 1.0
-BuildRequires:	pkgconfig(egl)
-BuildRequires:	pkgconfig(gl)
-BuildRequires:	pkgconfig(wayland-server) >= 1.15.0
-BuildRequires:	pkgconfig(wayland-client) >= 1.15.0
-BuildRequires:	pkgconfig(wayland-scanner) >= 1.15.0
-BuildRequires:	pkgconfig(wayland-protocols)
+BuildRequires:	pkgconfig(gbm)
 Requires:	%{libname} >= %{EVRD}
 BuildSystem:	meson
 
@@ -28,23 +28,25 @@ BuildSystem:	meson
 %package -n %{libname}
 Summary:	%{summary}
 Group:		System/Libraries
-Provides:	%{name}
+Provides:	%{name} = %{EVRD}
 
 %description -n %{libname}
 %{summary}.
 
-%package -n %{devname}
-Summary:	Nvidia GBM EGL External Platform library development package
-Group:		Development/C
+%package -n %{lib32name}
+Summary:	%{summary}
+Group:		System/Libraries
 Requires:	%{libname} = %{EVRD}
 
-%description -n %{devname}
-Nvidia GBM EGL External Platform library development package.
+%description -n %{lib32name}
+%{summary}.
 
 %files -n %{libname}
 %license COPYING
-%{_libdir}/*.so.%{major}*
+%{_libdir}/*.so*
 %{_datadir}/egl/egl_external_platform.d/15_nvidia_gbm.json
 
-%files -n %{devname}
-%{_libdir}/libnvidia-egl-gbm.so
+%if %{with compat32}
+%files -n %{lib32name}
+%{_prefix}/lib/*.so*
+%endif

@@ -17,6 +17,7 @@ License:	MIT
 URL:		https://github.com/NVIDIA/egl-gbm
 Source0:	https://github.com/NVIDIA/egl-gbm/archive/%{version}/%{name}-%{version}.tar.gz
 
+BuildRequires:	pkgconfig(eglexternalplatform)
 BuildRequires:	pkgconfig(libdrm)
 BuildRequires:	pkgconfig(gbm)
 Requires:	%{libname} >= %{EVRD}

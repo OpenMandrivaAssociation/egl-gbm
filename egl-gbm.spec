@@ -9,7 +9,7 @@
 %endif
 
 Name:		egl-gbm
-Version:	1.1.2.1
+Version:	1.1.3
 Release:	1
 Group:		System/Libraries
 Summary:	GBM EGL External Platform library for nvidia GPUs

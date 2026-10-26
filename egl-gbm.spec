@@ -9,7 +9,7 @@
 %endif
 
 Name:		egl-gbm
-Version:	1.1.3
+Version:	1.1.4
 Release:	1
 Group:		System/Libraries
 Summary:	GBM EGL External Platform library for nvidia GPUs
@@ -26,6 +26,11 @@ BuildRequires:	pkgconfig(egl)
 BuildRequires:	devel(libdrm)
 BuildRequires:	devel(libgbm)
 BuildRequires:	devel(libEGL)
+BuildRequires:	cross-i686-openmandriva-linux-gnu-binutils
+BuildRequires:	cross-i686-openmandriva-linux-gnu-libc
+BuildRequires:	cross-i686-openmandriva-linux-gnu-gcc
+BuildRequires:	cross-i686-openmandriva-linux-gnu-kernel-headers
+BuildRequires:	cross-i686-openmandriva-linux-gnu-clang
 %endif
 
 Requires:	%{libname} >= %{EVRD}
